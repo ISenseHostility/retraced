@@ -1,11 +1,21 @@
 # retraced.cc — Portainer stack definition.
 #
 # Set these in the stack's environment variables (Portainer → stack → Environment):
-#   RETRACED_IMAGE  full image reference in your registry, e.g. registry.example.com/retraced-site:latest
-#   RETRACED_PORT   host port to publish (put your TLS reverse proxy in front for retraced.cc)
+#   RETRACED_IMAGE   full image reference in your registry, e.g. registry.example.com/retraced-site:latest
+#   PROXY_NETWORK    the external Docker network your reverse proxy (e.g. Nginx Proxy
+#                    Manager) is attached to — the proxy can then reach this container
+#                    by name on port 80, no published host port needed
+#   RETRACED_PORT    optional direct host port, handy for testing without the proxy
 services:
   web:
     image: ${RETRACED_IMAGE:?set RETRACED_IMAGE in the stack environment}
     restart: unless-stopped
+    networks:
+      - proxy
     ports:
       - "${RETRACED_PORT:-8090}:80"
+
+networks:
+  proxy:
+    external: true
+    name: ${PROXY_NETWORK:?set PROXY_NETWORK to your reverse proxy's Docker network}
