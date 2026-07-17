@@ -1,0 +1,11 @@
+# retraced.cc — Portainer stack definition.
+#
+# Set these in the stack's environment variables (Portainer → stack → Environment):
+#   RETRACED_IMAGE  full image reference in your registry, e.g. registry.example.com/retraced-site:latest
+#   RETRACED_PORT   host port to publish (put your TLS reverse proxy in front for retraced.cc)
+services:
+  web:
+    image: ${RETRACED_IMAGE:?set RETRACED_IMAGE in the stack environment}
+    restart: unless-stopped
+    ports:
+      - "${RETRACED_PORT:-8090}:80"

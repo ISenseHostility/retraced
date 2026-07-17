@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Retraced — your Discord, retraced. Local-only statistics for BetterDiscord</title>
+  <meta name="description" content="A BetterDiscord plugin that turns your own chatting into statistics — rhythm, hesitation, people, words. Everything stays on your device. No servers, no telemetry." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" fill="%2316181d"/><path d="M16 16 L16 5 A11 11 0 0 1 25.5 21.5 Z" fill="%233987e5"/><circle cx="16" cy="16" r="2.2" fill="%23e7eaf1"/></svg>' />
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="16" cy="16" r="14" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1.5" />
+        <path d="M16 16 L16 5 A11 11 0 0 1 25.5 21.5 Z" fill="#3987e5" />
+        <circle cx="16" cy="16" r="2.2" fill="currentColor" />
+      </svg>
+      <span>retraced</span>
+    </a>
+    <nav class="top-nav">
+      <a href="#install">Install</a>
+      <a href="https://github.com/ISenseHostility/retraced">Source</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">retraced.cc · v1.0.0 · a BetterDiscord plugin</p>
+      <h1>Your Discord, retraced<span class="accent">.</span></h1>
+      <p class="lede">
+        Retraced records your own Discord behaviour and turns it into statistics, inside the client —
+        when you chat, how long you hesitate before sending, who reaches out first, the words you lean on.
+        It all stays on your device.
+      </p>
+      <div class="cta-row">
+        <a class="button button-primary" href="/Retraced.plugin.js" download>Download Retraced.plugin.js</a>
+        <a class="button button-ghost" href="https://github.com/ISenseHostility/retraced">Read the source</a>
+      </div>
+    </section>
+
+    <figure class="stream" aria-hidden="true">
+      <svg viewBox="0 0 1200 240" preserveAspectRatio="none">
+        <path fill="#c98500" fill-opacity="0.9" d="M0,150 C150,120 260,170 400,155 C560,138 660,175 820,160 C980,146 1080,168 1200,150 L1200,190 C1060,205 950,182 800,196 C650,210 540,178 380,194 C240,208 120,186 0,198 Z"/>
+        <path fill="#d55181" fill-opacity="0.9" d="M0,120 C160,95 300,140 460,122 C620,105 740,142 900,126 C1030,113 1120,132 1200,118 L1200,150 C1080,168 980,146 820,160 C660,175 560,138 400,155 C260,170 150,120 0,150 Z"/>
+        <path fill="#199e70" fill-opacity="0.9" d="M0,88 C180,64 340,108 520,88 C700,70 820,104 980,90 C1080,81 1150,92 1200,84 L1200,118 C1120,132 1030,113 900,126 C740,142 620,105 460,122 C300,140 160,95 0,120 Z"/>
+        <path fill="#3987e5" fill-opacity="0.95" d="M0,50 C200,20 380,72 560,48 C740,26 880,66 1040,50 C1110,43 1170,50 1200,44 L1200,84 C1150,92 1080,81 980,90 C820,104 700,70 520,88 C340,108 180,64 0,88 Z"/>
+      </svg>
+      <figcaption class="stream-caption">where your messages live, week by week — one of eighteen charts</figcaption>
+    </figure>
+
+    <section class="rule" aria-label="The content rule">
+      <pre class="rule-block"><span class="c">// the content rule — enforced where messages are captured, not in the UI</span>
+<span class="k">DMs</span>          → both sides, stored in full
+<span class="k">group DMs</span>    → both sides, stored in full
+<span class="k">servers</span>      → your own messages only. other people's server text never reaches disk
+<span class="k">everything</span>   → on this device. no network calls, no telemetry, ever</pre>
+    </section>
+
+    <section class="cards">
+      <div class="card">
+        <h3>Nothing leaves</h3>
+        <p>No servers, no error reporting, no CDN bundles. The build is tested to contain no network calls, and the source is public so you don't have to take our word for it.</p>
+      </div>
+      <div class="card">
+        <h3>A kill switch that means it</h3>
+        <p>Turn off content storage and Retraced stops keeping text <em>and erases what it already stored</em> — your counts and charts survive.</p>
+      </div>
+      <div class="card">
+        <h3>Yours to keep, yours to shred</h3>
+        <p>Export everything to one JSON file and import it back. Wipe it all, one person, a date range, or stored text only.</p>
+      </div>
+    </section>
+
+    <section class="tabs" aria-label="What's inside">
+      <h2>Seven tabs of you</h2>
+      <ul class="tab-grid">
+        <li><span class="tab-name">Overview</span> — where your messages go: Sankey, streamgraph, an activity calendar</li>
+        <li><span class="tab-name">Rhythm</span> — the radial clock, your week hour by hour, session lengths</li>
+        <li><span class="tab-name">Hesitation</span> — <span class="warm">typed and then deleted</span>: where, at whom, how often</li>
+        <li><span class="tab-name">People</span> — who reaches out first, who replies faster, your circle</li>
+        <li><span class="tab-name">Content</span> — the words you lean on, message lengths, full-text search of your history</li>
+        <li><span class="tab-name">Voice</span> — minutes in voice and who you actually share them with</li>
+        <li><span class="tab-name">Data</span> — backup, restore, remove, rebuild. The boring tab that keeps it honest</li>
+      </ul>
+    </section>
+
+    <section class="install" id="install">
+      <h2>Install</h2>
+      <ol class="steps">
+        <li>Install <a href="https://betterdiscord.app">BetterDiscord</a>.</li>
+        <li>
+          Download <a href="/Retraced.plugin.js" download>Retraced.plugin.js</a> into your plugins folder —
+          <code>%appdata%\BetterDiscord\plugins</code> on Windows, or open it from
+          <span class="path">Settings&nbsp;→&nbsp;Plugins&nbsp;→&nbsp;Open&nbsp;Plugins&nbsp;Folder</span>.
+        </li>
+        <li>Enable <strong>Retraced</strong>, then press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>H</kbd> anywhere in Discord.</li>
+      </ol>
+      <p class="note">Charts fill in as you chat. The first week is quiet; the first month is honest.</p>
+    </section>
+  </main>
+
+  <footer class="bottom">
+    <span>v1.0.0 · built for BetterDiscord</span>
+    <span class="dot">·</span>
+    <a href="https://github.com/ISenseHostility/retraced">GitHub</a>
+    <span class="dot">·</span>
+    <span>everything stays on device</span>
+  </footer>
+</body>
+</html>

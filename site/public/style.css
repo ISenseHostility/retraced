@@ -1,0 +1,293 @@
+/* Retraced — retraced.cc
+   Palette drawn from the plugin's own validated chart colors:
+   blue #3987e5 · orange #d95926 · green #199e70 · pink #d55181 · amber #c98500 */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #16181d;
+  --surface: #1e2127;
+  --surface-2: #23262e;
+  --line: rgba(231, 234, 241, 0.08);
+  --ink: #e7eaf1;
+  --muted: #8b93a3;
+  --blue: #3987e5;
+  --orange: #d95926;
+  --mono: ui-monospace, "Cascadia Code", "Segoe UI Mono", Consolas, monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: system-ui, "Segoe UI", -apple-system, "Helvetica Neue", sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ---------------------------------------------------------------- header */
+
+.top {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 22px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+  font-weight: 650;
+  font-size: 17px;
+  letter-spacing: 0.01em;
+}
+
+.brand:hover { text-decoration: none; }
+.brand-mark { width: 26px; height: 26px; }
+
+.top-nav { display: flex; gap: 22px; }
+.top-nav a { color: var(--muted); font-size: 14px; }
+.top-nav a:hover { color: var(--ink); text-decoration: none; }
+
+/* ---------------------------------------------------------------- hero */
+
+.hero { padding: 72px 0 12px; }
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  margin-bottom: 18px;
+}
+
+.hero h1 {
+  font-size: clamp(44px, 7.5vw, 76px);
+  line-height: 1.02;
+  font-weight: 750;
+  letter-spacing: -0.025em;
+  max-width: 14ch;
+}
+
+.hero .accent { color: var(--orange); }
+
+.lede {
+  margin-top: 22px;
+  max-width: 56ch;
+  font-size: 17px;
+  color: var(--muted);
+}
+
+.cta-row { margin-top: 30px; display: flex; gap: 12px; flex-wrap: wrap; }
+
+.button {
+  display: inline-block;
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  transition: transform 120ms ease, background 120ms ease;
+}
+
+.button:hover { text-decoration: none; transform: translateY(-1px); }
+
+.button-primary { background: var(--blue); color: #fff; }
+.button-primary:hover { background: #4a94ec; }
+
+.button-ghost {
+  color: var(--ink);
+  border: 1px solid var(--line);
+  background: transparent;
+}
+.button-ghost:hover { background: var(--surface); }
+
+/* ---------------------------------------------------------------- streamgraph */
+
+.stream {
+  margin: 44px -24px 0;
+  animation: rise 900ms ease-out both;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stream { animation: none; }
+}
+
+.stream svg { display: block; width: 100%; height: clamp(130px, 22vw, 240px); }
+
+.stream-caption {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+  text-align: right;
+  padding: 8px 24px 0;
+}
+
+/* ---------------------------------------------------------------- the rule */
+
+.rule { margin: 64px 0 0; }
+
+.rule-block {
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.9;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--blue);
+  border-radius: 8px;
+  padding: 20px 24px;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.rule-block .c { color: var(--muted); }
+.rule-block .k { color: var(--blue); font-weight: 600; }
+
+/* ---------------------------------------------------------------- cards */
+
+.cards {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 20px 22px;
+}
+
+.card h3 { font-size: 16px; margin-bottom: 8px; letter-spacing: -0.01em; }
+.card p { font-size: 14px; color: var(--muted); }
+.card em { color: var(--ink); font-style: normal; font-weight: 600; }
+
+/* ---------------------------------------------------------------- tabs */
+
+.tabs { margin-top: 72px; }
+
+h2 {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  margin-bottom: 20px;
+}
+
+.tab-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 28px;
+}
+
+.tab-grid li {
+  font-size: 14.5px;
+  color: var(--muted);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.tab-name {
+  font-family: var(--mono);
+  font-size: 13.5px;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.warm { color: var(--orange); }
+
+@media (max-width: 640px) {
+  .tab-grid { grid-template-columns: 1fr; }
+}
+
+/* ---------------------------------------------------------------- install */
+
+.install { margin-top: 72px; }
+
+.steps {
+  list-style: none;
+  counter-reset: step;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.steps li {
+  counter-increment: step;
+  position: relative;
+  padding: 16px 20px 16px 62px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--mono);
+  font-weight: 700;
+  color: var(--blue);
+  font-size: 18px;
+}
+
+code, kbd {
+  font-family: var(--mono);
+  font-size: 0.9em;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 1px 6px;
+}
+
+.path { color: var(--ink); }
+
+.note {
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* ---------------------------------------------------------------- footer */
+
+.bottom {
+  max-width: 960px;
+  margin: 88px auto 0;
+  padding: 26px 24px 40px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+
+.bottom .dot { opacity: 0.5; }
+
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+  border-radius: 4px;
+}

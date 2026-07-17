@@ -103,6 +103,30 @@ Re-run any time with `node scripts/measure-storage.mjs` and a browser pointed at
 - **`BdApi.Data` is for settings only.** All capture data goes to IndexedDB from Phase 2.
 - Charts (Phase 3+) must be pure presentational components fed by pre-computed rollups; no chart touches the DB.
 
+## retraced.cc deployment
+
+The website (in `site/`) and the plugin ship as one Docker image: a multi-stage
+build compiles `Retraced.plugin.js` from source and serves it alongside the
+landing page via nginx (`/Retraced.plugin.js` is always the current build,
+sent as a download).
+
+- `Dockerfile` — plugin build + static site image
+- `docker-compose.yml` — the Portainer stack definition (set `RETRACED_IMAGE`
+  and optionally `RETRACED_PORT` in the stack's environment; terminate TLS for
+  retraced.cc at your reverse proxy)
+- `.github/workflows/release.yml` — on every push to `main`: run the test
+  suite, build the image, push it to the registry as
+  `retraced-site:latest` + `:sha`, then POST the Portainer stack webhook so
+  the stack re-pulls and redeploys
+
+Repository secrets the workflow needs: `REGISTRY_HOST`, `REGISTRY_USERNAME`,
+`REGISTRY_PASSWORD`, `PORTAINER_WEBHOOK_URL`. In Portainer, create the stack
+from this repo (or paste the compose file), enable **Re-pull image and
+redeploy** on its webhook, and put the webhook URL into the secret.
+
+Local check: `docker build -t retraced-site .` then
+`docker run --rm -p 8090:80 retraced-site`.
+
 ## Layout
 
 ```
