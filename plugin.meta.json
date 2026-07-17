@@ -1,0 +1,7 @@
+{
+  "name": "Retraced",
+  "author": "ISenseHostility",
+  "description": "Local-only statistics about your own Discord activity. Everything stays on this device — no network calls, ever.",
+  "version": "1.0.0",
+  "website": "https://retraced.cc"
+}
