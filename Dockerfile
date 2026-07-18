@@ -12,4 +12,4 @@ RUN node scripts/build.mjs
 FROM nginx:1.27-alpine
 COPY site/nginx.conf /etc/nginx/conf.d/default.conf
 COPY site/public /usr/share/nginx/html
-COPY --from=build /app/dist/Retraced.plugin.js /usr/share/nginx/html/Retraced.plugin.js
+COPY --from=build /app/Retraced.plugin.js /usr/share/nginx/html/Retraced.plugin.js

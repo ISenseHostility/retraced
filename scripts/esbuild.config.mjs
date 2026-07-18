@@ -14,7 +14,8 @@ export const bdBanner = [
   " */",
 ].join("\n");
 
-export const outfile = path.join(root, "dist", `${meta.name}.plugin.js`);
+// The bundle is committed at the repo root — it is the release artifact users download.
+export const outfile = path.join(root, `${meta.name}.plugin.js`);
 
 const shim = (name) => path.join(root, "src", "shims", name);
 
@@ -32,9 +33,10 @@ export function createBuildOptions() {
     target: ["chrome120"],
     jsx: "automatic",
     charset: "utf8",
-    // chart libraries push the readable bundle past 1 MB — minified it stays reviewable
-    // via the repo, and the BD meta banner/footer are emitted verbatim either way
-    minify: true,
+    // Never minify: BetterDiscord requires plugin code to be human-readable for review,
+    // and the committed root bundle is what users install. Size (>1 MB with the chart
+    // libraries) is acceptable; the BD meta banner/footer are emitted verbatim.
+    minify: false,
     sourcemap: false,
     legalComments: "none",
     logLevel: "silent",
